@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beneficiaries', function (Blueprint $table) {
+        Schema::create('newcases', function (Blueprint $table) {
             $table->id();
-            $table->string('surname')->nullable();
-            $table->string('othernames')->nullable();
-            $table->string('insitution')->nullable();
-            $table->string('phonenumber')->nullable();
-            $table->string('email')->nullable()->uniqid();
+            $table->string('surname');
+            $table->string('othernames');
+            $table->string('phonenumber');
+            $table->string('email')->uniqid();
             $table->string('address');
             $table->longText('details');
             $table->string('image1');
             $table->string('image2');
+            $table->string('image3');
+            $table->string('image4');
             $table->string('video');
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('beneficiaries');
+        Schema::dropIfExists('newcases');
     }
 };

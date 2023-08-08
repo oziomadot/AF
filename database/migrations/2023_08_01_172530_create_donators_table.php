@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('donators', function (Blueprint $table) {
             $table->id();
+            $table->string('surname');
+            $table->string('othernames');
+            $table->string('insitution')->nullable();
+            $table->string('phonenumber');
+            $table->string('email')->uniqid();
+            $table->foreignId('whattodonate_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('address');
+            $table->longText('details');
+            $table->string('image1');
+            $table->string('image2');
+            $table->string('video');
             $table->timestamps();
         });
     }

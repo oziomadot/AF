@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
+            $table->string('surname');
+            $table->string('othernames');
+            $table->string('company')->nullable();
+            $table->string('phonenumber');
+            $table->string('email')->uniqid();
+            $table->string('address');
+            $table->longText('about');
+            $table->string('image1');
+           
             $table->timestamps();
         });
     }

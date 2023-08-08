@@ -1,15 +1,11 @@
 <x-app-layout>
-    <x-dashboardview heading="ADD A NEW LAND FOR SALE">
-      <x-auth-session-status/>
 
+      {{-- <x-auth-session-status/> --}}
        <x-form>
-            <div class="content-center">
-                <h3 class="text-4xl font-mono text-center font-bold pt-4 text-red-900"> LAND FOR SALE FORM</h3>
-                <p class="text-xl text-center font-sans pb-4"> Please, fill in correct information</p>
-            </div>
+          
                 
             
-                <form method="POST" action="/cases" enctype="multipart/form-data">
+                <form method="POST" action="/newcases" enctype="multipart/form-data">
                @csrf
                @honeypot
             
@@ -28,24 +24,66 @@
                 <x-forminput name="email"  type="email" class="form-input" />
                 <x-formlabel name="Home address"/>
                 <x-forminput name="address"  type="text" class="form-input" />
-                <x-formlabel name="Home address"/>
-                <x-forminput name="address"  type="text" class="form-input" />
+                
               
                 <x-formlabel name="Details"/>
-                <textarea name="landamount"  id="landamount" x-mask:dynamic="$money($input)" x-data
-                class="form-input" />
+                <textarea name="details"  id="details"  class="form-input" rows="7" cols="70" placeholder="Tell us his/her story"></textarea>
 
-                <x-formlabel name="Agent Fee"/>
-                <x-forminput name="landagent" id="landagent" type="number" class="form-input" readonly />
-              
-                <x-formlabel name="Address"/>
-                <x-forminput name="landaddress"  type="text" class="form-input" />
+                
               
                 <div x-data="imgPreview" x-cloak>
-                  <x-input-label for="landimage"  :value="__('Picture')"/>        
-                  <x-forminput name="landimage"  type="file" class="block mt-1 w-full" accept="image/*" 
+                  <x-input-label for="image1"  :value="__('Picture 1')"/>        
+                  <x-forminput name="image1"  type="file" class="block mt-1 w-full" accept="image/*" 
                   x-ref="myFile" @change="previewFile"/>
-                  <x-input-error :messages="$errors->get('landimage')" class="mt-2" />    
+                  <x-input-error :messages="$errors->get('image1')" class="mt-2" />    
+                      <template x-if="imgsrc">
+                          <p class="w-40">
+                          <img :src="imgsrc" class="imgPreview">
+                          </p>
+                      </template>
+                   </div> 
+
+                   <div x-data="imgPreview" x-cloak>
+                    <x-input-label for="image2"  :value="__('Picture 2')"/>        
+                    <x-forminput name="image2"  type="file" class="block mt-1 w-full" accept="image/*" 
+                    x-ref="myFile" @change="previewFile"/>
+                    <x-input-error :messages="$errors->get('image2')" class="mt-2" />    
+                        <template x-if="imgsrc">
+                            <p class="w-40">
+                            <img :src="imgsrc" class="imgPreview">
+                            </p>
+                        </template>
+                     </div> 
+
+                     <div x-data="imgPreview" x-cloak>
+                        <x-input-label for="image3"  :value="__('Picture 3')"/>        
+                        <x-forminput name="image3"  type="file" class="block mt-1 w-full" accept="image/*" 
+                        x-ref="myFile" @change="previewFile"/>
+                        <x-input-error :messages="$errors->get('image3')" class="mt-2" />    
+                            <template x-if="imgsrc">
+                                <p class="w-40">
+                                <img :src="imgsrc" class="imgPreview">
+                                </p>
+                            </template>
+                         </div> 
+              
+                         <div x-data="imgPreview" x-cloak>
+                            <x-input-label for="image4"  :value="__('Picture 4')"/>        
+                            <x-forminput name="image4"  type="file" class="block mt-1 w-full" accept="image/*" 
+                            x-ref="myFile" @change="previewFile"/>
+                            <x-input-error :messages="$errors->get('image4')" class="mt-2" />    
+                                <template x-if="imgsrc">
+                                    <p class="w-40">
+                                    <img :src="imgsrc" class="imgPreview">
+                                    </p>
+                                </template>
+                             </div> 
+
+                <div x-data="imgPreview" x-cloak>
+                  <x-input-label for="video"  :value="__('Video')"/>        
+                  <x-forminput name="video"  type="file" class="block mt-1 w-full" accept="video/*" 
+                  x-ref="myFile" @change="previewFile"/>
+                  <x-input-error :messages="$errors->get('video')" class="mt-2" />    
                       <template x-if="imgsrc">
                           <p class="w-40">
                           <img :src="imgsrc" class="imgPreview">
@@ -54,36 +92,6 @@
                    </div> 
               
                
-
-                <div x-data="imgPreview" x-cloak>
-                  <x-input-label for="landvideo"  :value="__('Video')"/>        
-                  <x-forminput name="landvideo"  type="file" class="block mt-1 w-full" accept="video/*" 
-                  x-ref="myFile" @change="previewFile"/>
-                  <x-input-error :messages="$errors->get('landvideo')" class="mt-2" />    
-                      <template x-if="imgsrc">
-                          <p class="w-40">
-                          <img :src="imgsrc" class="imgPreview">
-                          </p>
-                      </template>
-                   </div> 
-              
-                <x-formcheckbox name="landaccess"  />
-                <x-formlabel name="Access Road"/>
-              
-                <x-formcheckbox name="landfenced"/>
-                <x-formlabel name="Fenced"/>
-                 
-              
-              <x-formcheckbox name="landsurvey" />
-              <x-formlabel name="Survey Plan"/>
-                      
-              <x-formcheckbox name="landcofo"  />
-              <x-formlabel name="C of O "/>
-              
-            
-                <x-formlabel name="Meeting place"/>
-                <x-forminput name="meetingplace"  class="form-input" required/>
-            
               <hr class="w-70 h-1 mx-auto my-4 bg-gray-700 border-0 rounded md:my-5 dark:bg-gray-700">
                       <h5 class="font-bold py-1 text-lg text-cyan-700">Declaration</h5>
             
@@ -100,7 +108,7 @@
               RESET
            </x-general-button>
                   
-           <a href="/lands">
+           <a href="/dashboard">
               <x-general-button
           type="button"
           data-mdb-ripple="true"
@@ -116,6 +124,6 @@
             
             
        </x-form>
-    </x-dashboardview>
+  
 
   </x-app-layout>
