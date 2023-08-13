@@ -47,8 +47,8 @@
         </div>
         
          <div class="w-auto px-5"> 
-        <p class="font-mono text-base text-brown-900"><b>Name:</b>{{$staff->surname}}  {{$staff->firstname}}</p>
-        <p class="font-mono text-base text-brown-900"><b>Designation:</b> {{$staff->designation}}</p>
+        <p class="font-mono text-base text-brown-900"><b>Name:</b>{{$staff->name}}</p>
+        <p class="font-mono text-base text-brown-900"><b>Designation:</b> {{$staff->designation->name}}</p>
         <p class="font-mono text-base text-brown-900"><b>Email:</b> {{$staff->officalemail}}</p>
                 <p class="font-mono  text-cyan-600">...more</p>
         </div>

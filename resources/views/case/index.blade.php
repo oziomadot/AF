@@ -1,7 +1,7 @@
 <x-app-layout>
     
        
-        {{-- <x-auth-session-status/> --}}
+        <x-auth-session-status/>
         
             <div class=" relative">
                 
@@ -52,16 +52,16 @@
                             {{$case->address}}
                         </td>
                         <td class="border-r-2 border-black text-black py-3 px-2">
-                            {{$case->image1}}
+                            <img src="{{ asset('storage/'.$case->image1) }}" alt="" class="rounded-xl ml-6 w-32"/>
                         </td>
                         <td class="border-r-2 border-black  text-black py-3 px-2">
-                            {{$case->video}}
+                            <img src="{{ asset('storage/'.$case->video) }}" alt="" class="rounded-xl ml-6 w-32"/>
                         </td> 
                         
                         <td>
                                 <a href="/newcases/{{$case->id }}/edit" title="Edit" class="hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                  </svg>
+                                  </svg><span class="text-cyan-800 font-semibold">Edit</span>
                                   </a>
                                
                         
@@ -70,7 +70,7 @@
                                 @method('DELETE')
                                 @honeypot
 
-                                <button class="text-xs text-gray-400">Delete</button>
+                                <button class="text-xs text-red-400 font-semibold">Delete</button>
                             </form>
                         </td>
 

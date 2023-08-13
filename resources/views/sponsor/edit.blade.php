@@ -33,7 +33,7 @@
             
               <x-formlabel name="About"/>
               <textarea name="about"  id="details"  class="form-input" rows="7" cols="70" placeholder="Tell us about yourself or your company">
-                {{old('about')}}
+                {{old('about', $sponsor->about)}}
               </textarea>
 
               
@@ -44,7 +44,7 @@
                 :value="old('image1', $sponsor->image1)"/>               
                 <div>
     
-                    <img src="{{ asset('storage/'.$sponsor->image1) }}" alt="" class="rounded-xl ml-6" width="100"/>
+                    <img src="{{ asset('storage/'.$sponsor->image1) }}" alt="" class="rounded-xl ml-6 w-60"/>
                 </div>   
                  
 

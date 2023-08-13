@@ -17,7 +17,9 @@
         
         <div class="item inline-block">
           <div class="news  ">
-          <a href="/beneficiaries/{{$beneficiary->id}}" >
+            
+            <a href="{{route('benef', $beneficiary->id)}}">
+          
             
             <x-indexdiv>
                    
@@ -28,7 +30,7 @@
                 </x-image-card>
            
             <div class=" w-auto py-2">
-               <x-fonthead> NAME:</x-fonthead> <x-fontbody> {{$beneficiary->insitution}} ?? {{$beneficiary->othernames}}</x-fontbody> <br>
+               <x-fonthead> NAME:</x-fonthead> <x-fontbody> @if($beneficiary->insitution): {{$beneficiary->insitution}} @else {{$beneficiary->othernames}} @endif</x-fontbody> <br>
                             
               </div>
         </x-indexdiv>
@@ -58,7 +60,7 @@
         
         <div class="item inline-block">
           <div class="news  ">
-          <a href="/donators/{{$donator->id}}" >
+          <a href="{{route('donat', $donator->id)}}" >
             
             <x-indexdiv>
                    
@@ -69,7 +71,7 @@
                 </x-image-card>
            
             <div class=" w-auto py-2">
-               <x-fonthead> NAME:</x-fonthead> <x-fontbody> {{$donator->insitution}} ?? {{$donator->othernames}}</x-fontbody> <br>
+               <x-fonthead> NAME:</x-fonthead> <x-fontbody> @if($donator->insitution): {{$donator->insitution}} @else {{$donator->othernames}} @endif</x-fontbody> <br>
                             
               </div>
         </x-indexdiv>
@@ -99,7 +101,7 @@
         
         <div class="item inline-block">
           <div class="news  ">
-          <a href="/cases/{{$case->id}}" >
+          <a href="/newcas/{{$case->id}}" >
             
             <x-indexdiv>
                    
@@ -139,7 +141,7 @@
         
         <div class="item inline-block">
           <div class="news  ">
-          <a href="/sponsor/{{$sponsor->id}}" >
+          <a href="/spons/{{$sponsor->id}}" >
             
             <x-indexdiv>
                    

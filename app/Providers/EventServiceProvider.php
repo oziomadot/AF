@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Beneficiary;
+use App\Models\Donator;
+use App\Models\Newcase;
+use App\Models\Sponsor;
+use App\Models\User;
+use App\Observers\BeneficiaryObserver;
+use App\Observers\DonatorObserver;
+use App\Observers\NewcaseObserver;
+use App\Observers\SponsorObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +28,15 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+    ];
+
+    protected $observers = [
+        Beneficiary::class =>[BeneficiaryObserver::class],
+        Donator::class =>[DonatorObserver::class],
+        Newcase::class =>[NewcaseObserver::class],
+        Sponsor::class =>[SponsorObserver::class],
+        
+        User::class => [UserObserver::class],
     ];
 
     /**

@@ -19,26 +19,29 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" 
+            :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
        
         <div>
             <x-input-label for="officalemail" :value="__('Offical Email')" />
-            <x-text-input id="officalemail" name="officalemail" type="text" class="mt-1 block w-full" :value="old('officalemail', $user->officalemail)"/>
+            <x-text-input id="officalemail" name="officalemail" type="text" class="mt-1 block w-full" 
+            :value="old('officalemail', $user->officalemail)"/>
             <x-input-error class="mt-2" :messages="$errors->get('officalemail')" />
         </div>
 
         <div>
             <x-input-label for="about" :value="__('Why AF')" />
-            <textarea id="about" name="about" rows="5" cols="50" class="mt-1 block w-full" :value="old('about', $user->about)" 
-                placeholder="Why did you join Amandine foundation"></textarea>
+            <textarea id="about" name="about" rows="5" cols="50" class="mt-1 block w-full" 
+           
+                placeholder="Why did you join Amandine foundation">{{old('about', $user->about)}}</textarea>
             <x-input-error class="mt-2" :messages="$errors->get('about')" />
         </div>
 
         <div>
             <x-formlabel name="Designation"/>
-                    <select class="form-select py-px" id="designation" name="designation" required>
+                    <select class="form-select py-px" id="designation" name="designation_id" required>
                         <option selected>Select designation</option>
                         @foreach($designation as $designation)
                             <option value="{{$designation->id}}" {{old('designation_id') == $designation->id ? 'selected' : ''}}>
@@ -49,14 +52,16 @@
 
         <div>
             <x-input-label for="profession1" :value="__('Profession')" />
-            <x-text-input id="profession1" name="profession1" type="text" class="mt-1 block w-full" :value="old('profession1', $user->profession1)"/>
+            <x-text-input id="profession1" name="profession1" type="text" class="mt-1 block w-full" 
+            :value="old('profession1', $user->profession1)"/>
             <x-input-error class="mt-2" :messages="$errors->get('profession1')" />
         </div>
 
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" 
+            :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Newcase;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 class NewcaseController extends Controller
@@ -12,7 +13,10 @@ class NewcaseController extends Controller
     public function index()
     {
 
-        $cases = Newcase::all();
+        $cases = Cache::rememberForever('cases', function() { 
+            return Newcase::all();
+        });
+
         return view('case.index', [
             'case' => $cases,
         ]);
@@ -75,12 +79,12 @@ public function create()
     public function update(Newcase $newcase)
     {
         $unewcase = request()->validate([
-            "surname" => ['string'],
-            "othernames" => ['string'],
-            "phonenumber" =>['string'],
-            "email" => ['string', 'email', Rule::unique('cases')->ignore($newcase)],
-            "address" => ['string'],
-            "details" => ['string'],
+            'surname' => ['string'],
+            'othernames' => ['string'],
+            'phonenumber' =>['string'],
+            'email' => ['string', 'email', Rule::unique('newcases')->ignore($newcase)],
+            'address' => ['string'],
+            'details' => ['string'],
             'image1' => ['image'],
             'image2' => ['image'],
             'image3' => ['image'],
@@ -88,7 +92,7 @@ public function create()
             'video' => ['video'],
 
         ]); 
-
+       
         if($unewcase['image1'] ?? false){
             $unewcase['image1'] = request()->file('image1')->store('newcases');
         }
@@ -111,7 +115,14 @@ public function create()
         
 
         $newcase->update($unewcase);
-        
+
+        return redirect()->route('newcases.index')->with('status', 'Updated successfully');      
        
+    }
+
+    public function destroy(Newcase $newcase)
+    {
+        $newcase->delete();
+        return redirect()->route('newcases.index')->with('status', 'Record deleted  successfully'); 
     }
 }

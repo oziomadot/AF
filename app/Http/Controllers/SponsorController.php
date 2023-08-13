@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,10 @@ class SponsorController extends Controller
 {
     public function index()
     {
-        $sponsor= Sponsor::all();
+        $sponsor= Cache::rememberForever('sponsor', function() { 
+            return Sponsor::all();
+        });
+
         return view('sponsor.index', [
             'sponsor' => $sponsor,
         ]);

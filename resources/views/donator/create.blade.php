@@ -5,7 +5,7 @@
         
               
           
-              <form method="POST" action="/sponsors" enctype="multipart/form-data">
+              <form method="POST" action="/donators" enctype="multipart/form-data">
              @csrf
              @honeypot
           
@@ -20,9 +20,11 @@
               <x-formlabel name="Othernames"/>
               <x-forminput name="othernames"  type="text" class="form-input" />
               <x-input-error :messages="$errors->get('othernames')" class="mt-2" /> 
-              <x-formlabel name="Company"/>
-              <x-forminput name="company"  type="text" class="form-input" />
-              <x-input-error :messages="$errors->get('company')" class="mt-2" /> 
+              <x-formlabel name="Institution"/>
+              <x-forminput name="institution"  type="text" class="form-input" />
+              <x-input-error :messages="$errors->get('institution')" class="mt-2" />
+                
+                
               <x-formlabel name="Phone number"/>
               <x-forminput name="phonenumber"  type="text" class="form-input" />
               <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" /> 
@@ -32,11 +34,23 @@
               <x-formlabel name="Address"/>
               <x-forminput name="address"  type="text" class="form-input" />
               <x-input-error :messages="$errors->get('address')" class="mt-2" /> 
+
+
+                <x-formlabel name="Details"/>
+              <textarea name="details"  id="details"  class="form-input" rows="7" cols="70" placeholder="Tell us about yourself or your company"></textarea>
+              <x-input-error :messages="$errors->get('details')" class="mt-2" /> 
               
             
-              <x-formlabel name="About"/>
-              <textarea name="about"  id="details"  class="form-input" rows="7" cols="70" placeholder="Tell us about yourself or your company"></textarea>
-              <x-input-error :messages="$errors->get('about')" class="mt-2" /> 
+                <x-input-label for="whattodonate"  :value="__('WHAT DO YOU WANT TO DONATE')"/>
+                           <x-input-error :messages="$errors->get('whattodonate')" class="mt-2" />
+                                <select class="form-select py-px" id="whattodonate" name="whattodonate" required>
+                                    <option>Select</option>
+                                    @foreach($item as $whattodonate)
+                                        <option value="{{$whattodonate->id}}" {{old('whattodonate_id') == $whattodonate->id ? 'selected' : ''}}>
+                                            {{$whattodonate->name}}</option>
+                                    @endforeach
+                                </select><br>
+                            
               
             
               <div x-data="imgPreview" x-cloak>
