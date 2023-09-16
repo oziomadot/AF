@@ -6,6 +6,7 @@ use App\Models\Beneficiary;
 use App\Models\Donator;
 use App\Models\Newcase;
 use App\Models\Sponsor;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,13 @@ class NewController extends Controller
     {
         return view('showpublic.sponsor', [
             'sponsor'=> $sponsor
+        ]);
+    }
+
+    public function staff(User $staff)
+    {
+        return view('showpublic.staff', [
+            'staff'=> $staff
         ]);
     }
 }

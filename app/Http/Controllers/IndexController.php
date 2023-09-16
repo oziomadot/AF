@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Available;
 use App\Models\Beneficiary;
 use App\Models\Donator;
 use App\Models\Newcase;
+use App\Models\Plan;
 use App\Models\Sponsor;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -56,4 +59,8 @@ class IndexController extends Controller
     {
         return view('giveform');
     }
+
+   
+
+   
 }

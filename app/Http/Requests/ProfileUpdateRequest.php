@@ -20,8 +20,9 @@ class ProfileUpdateRequest extends FormRequest
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'officalemail' => ['nullable','email', 'max:255', Rule::unique('users', 'officalemail')->ignore($this->user()->id)],
             'about' => ['nullable', 'string'],
-            'designation_id' => ['required', Rule::exists('designations', 'id')],
+            'designation_id' => ['nullable', Rule::exists('designations', 'id')],
             'profession1' => ['nullable', 'string'],
+            
         ];
     }
 }

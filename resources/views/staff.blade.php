@@ -4,7 +4,7 @@
 
 
 
-    <div class="shadow-xl shadow-blue-900  sm:w-4/5 justify-center sm:mx-28 sm:p-10">
+    <div class="shadow-xl shadow-blue-900  sm:w-11/12 justify-center sm:mx-10 sm:p-4">
 
         @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
@@ -26,7 +26,7 @@
          
             <div class="flex justify-center bg-yellow-200">
               <h2 class="font-mono text-4xl font-bold text-green-900 ">
-          MANAGEMENT AND VOLUNTEERS
+          MANAGEMENT 
         </h2>
         </div>
         
@@ -50,7 +50,7 @@
         <p class="font-mono text-base text-brown-900"><b>Name:</b>{{$staff->name}}</p>
         <p class="font-mono text-base text-brown-900"><b>Designation:</b> {{$staff->designation->name}}</p>
         <p class="font-mono text-base text-brown-900"><b>Email:</b> {{$staff->officalemail}}</p>
-                <p class="font-mono  text-cyan-600">...more</p>
+                <p class="font-mono  text-cyan-600"><a href="/staff/{{$staff->id}}">...more</a></p>
         </div>
         
         

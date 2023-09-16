@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Designation;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,8 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
+        
+       
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -64,5 +66,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function upload(User $user): RedirectResponse
+    {
+        $uuser = request()->validate([
+        'profilePix'=> ['image', 'required'],
+        ]);
+        
+        $uuser['profilePix'] = request()->file('profilePix')->store('staffs');
+        $user->update($uuser);
+
+        return redirect()->route('dashboard')->with('status', 'Your picture has been updated sucessfully!');
     }
 }

@@ -41,11 +41,11 @@
 
            
 
-            {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('donators')" :active="request()->routeIs('donators')">
-                {{ __('DONATORS') }}
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link :href="route('volunt')" :active="request()->routeIs('volunt')">
+                {{ __('VOLUNTEERS') }}
                 </x-nav-link>
-            </div> --}}
+            </div>
 
 
             {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -123,7 +123,11 @@
                     </x-nav-link>
                 </div>
             
-                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('volunteers.index')" :active="request()->routeIs('volunteers')">
+                    {{ __('VOLUNTEERS') }}
+                    </x-nav-link>
+                </div>
         
 
            
@@ -166,7 +170,9 @@
                 {{ __('Profile') }}
             </x-dropdown-link>
            
-
+            <x-dropdown-link :href="route('uploadpicture', Auth::user()->id)">
+                {{ __('Picture') }}
+            </x-dropdown-link>
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -254,15 +260,15 @@
     </div>
     
     
-{{--     
+    
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-    <x-responsive-nav-link :href="route('donators')" :active="request()->routeIs('donators')">
-        <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
-        {{ __('DONATORS') }}
+    <x-responsive-nav-link :href="route('volunt')" :active="request()->routeIs('volunt')">
+        <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('volunt') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
+        {{ __('VOLUNTEERS') }}
         </x-general-button>
     </x-responsive-nav-link>
     </div>
-     --}}
+    
     
     {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
     <x-responsive-nav-link :href="route('beneficiaries')" :active="request()->routeIs('beneficiaries')">
@@ -336,6 +342,12 @@
         </div>
     
 
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <x-responsive-nav-link :href="route('volunteers.index')" :active="request()->routeIs('volunteers')">
+            {{ __('VOLUNTERS') }}
+            </x-responsive-nav-link>
+        </div>
+
 
 
     <div class="pt-4 pb-1 border-t border-gray-200">
@@ -350,6 +362,9 @@
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
   
+                    <x-responsive-nav-link :href="route('uploadpicture', Auth::user()->id)">
+                        {{ __('Picture') }}
+                    </x-responsive-nav-link>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

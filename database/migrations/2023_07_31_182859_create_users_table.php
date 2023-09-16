@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('profession1')->nullable();
             $table->string('profession2')->nullable();
             $table->string('profession3')->nullable();
+            $table->string('profilePix')->nullable();
             $table->foreignId('designation_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

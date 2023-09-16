@@ -9,6 +9,8 @@ use App\Http\Controllers\NewcaseController;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\VoluntController;
+use App\Http\Controllers\VolunteerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +31,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/about', [IndexController::class, 'about'])->name('aboutus');
 Route::get('/staff', [IndexController::class, 'staff'])->name('staff');
+Route::get('/volunt', [VoluntController::class, 'index'])->name('volunt');
+Route::get('/voluntcreate', [VoluntController::class, 'create'])->name('volunt.create');
+Route::post('/newvolunt', [VoluntController::class, 'store']);
 Route::get('/benef/{beneficiary}', [NewController::class, 'benef'])->name('benef');
 Route::get('/donat/{donat}', [NewController::class, 'donat'])->name('donat');
 Route::get('/newcas/{case}', [NewController::class, 'newcas'])->name('newcas');
 Route::get('/spons/{sponsor}', [NewController::class, 'spons'])->name('spons');
+Route::get('/staff/{staff}', [NewController::class, 'staff'])->name('staff');
 Route::get('/giveform', [NewController::class, 'giveform'])->name('giveform');
 
 
@@ -42,14 +48,16 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::get('/uploadpicture', [ProfileController::class, 'upload'])->name('uploadpicture');
     Route::resources([
                 'beneficiaries'=>BeneficiaryController::class,
                 'newcases' =>NewcaseController::class,
                 'donators' => DonatorController::class,
                 'sponsors'=>SponsorController::class,
+                'volunteers'=>VolunteerController::class,
     ]
     , ['except'=>['show']]
 );

@@ -50,6 +50,7 @@
                     </select><br>
         </div>
 
+
         <div>
             <x-input-label for="profession1" :value="__('Profession')" />
             <x-text-input id="profession1" name="profession1" type="text" class="mt-1 block w-full" 

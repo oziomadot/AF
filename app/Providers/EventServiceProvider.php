@@ -2,16 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\Available;
 use App\Models\Beneficiary;
 use App\Models\Donator;
 use App\Models\Newcase;
+use App\Models\Plan;
 use App\Models\Sponsor;
 use App\Models\User;
+use App\Models\Volunteer;
+use App\Observers\AvailableObserver;
 use App\Observers\BeneficiaryObserver;
 use App\Observers\DonatorObserver;
 use App\Observers\NewcaseObserver;
+use App\Observers\PlanObserver;
 use App\Observers\SponsorObserver;
 use App\Observers\UserObserver;
+use App\Observers\VolunteerObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -35,7 +41,9 @@ class EventServiceProvider extends ServiceProvider
         Donator::class =>[DonatorObserver::class],
         Newcase::class =>[NewcaseObserver::class],
         Sponsor::class =>[SponsorObserver::class],
-        
+        Plan::class =>[PlanObserver::class],
+        Available::class =>[AvailableObserver::class],
+        Volunteer::class =>[VolunteerObserver::class],
         User::class => [UserObserver::class],
     ];
 

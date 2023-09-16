@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+use Facebook;
 
 class SponsorController extends Controller
 {
@@ -54,6 +55,42 @@ class SponsorController extends Controller
             'image1' => request()->file('image1')->store('sponsors'),
 
         ]);
+
+        $fb = new Facebook\Facebook([
+            'app_id' => '317840670581082',
+            'app_secret' => '85ab5605b85ba27b37c535161209ac05',
+            'default_graph_version' => 'v17.0',
+           ]);
+
+           $image = request()->file('image1');
+           $message = 'With a heart full of joy and gratefullness, we wish to thank in a special way one of our sponsor' . request()->surname .' for having a heart of gold and care for the indigent children. Visit: www.amandinefoundation.org for more information. Please, like, share and follow our page.';
+
+
+
+
+          $imageData = [
+            'source' => $fb->fileToUpload($image),
+            'message' => $message,
+           
+           ];
+
+        
+        try {
+           
+            $response = $fb->post(
+              '/325275893408060/photos',  $imageData,
+           
+              'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
+            );
+          } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+          } catch(Facebook\Exceptions\FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+          }
+          $graphNode = $response->getGraphNode();
+
 
         return Redirect::route('sponsors.index')->with('status', 'Sponsor added successfully');
     }
