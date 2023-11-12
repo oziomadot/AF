@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Activity;
 use App\Models\Available;
 use App\Models\Beneficiary;
 use App\Models\Donator;
@@ -10,6 +11,7 @@ use App\Models\Plan;
 use App\Models\Sponsor;
 use App\Models\User;
 use App\Models\Volunteer;
+use App\Observers\ActivityObserver;
 use App\Observers\AvailableObserver;
 use App\Observers\BeneficiaryObserver;
 use App\Observers\DonatorObserver;
@@ -45,6 +47,7 @@ class EventServiceProvider extends ServiceProvider
         Available::class =>[AvailableObserver::class],
         Volunteer::class =>[VolunteerObserver::class],
         User::class => [UserObserver::class],
+        Activity::class =>[ActivityObserver::class],
     ];
 
     /**

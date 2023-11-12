@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Available;
 use App\Models\Beneficiary;
 use App\Models\Donator;
@@ -17,26 +18,20 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $newcase = Cache::rememberForever('beneficiary', function() {
-            return Newcase::orderBy('created_at', 'DESC')->get();
-        });
-        $beneficiary = Cache::rememberForever('beneficiary', function() {
-            return Beneficiary::orderBy('created_at', 'DESC')->get();
-        });
-        $donator = Cache::rememberForever('beneficiary', function() {
-            return Donator::orderBy('created_at', 'DESC')->get();
-        });
-        $sponsor = Cache::rememberForever('beneficiary', function() {
-            return Sponsor::orderBy('created_at', 'DESC')->get();
-        });
+        
 
+        $volunteer = Cache::rememberForever('volunteer', function() {
+            return Volunteer::orderBy('created_at', 'DESC')->get();
+        });
 
 
         return view('index', [
-    'beneficiary' => $beneficiary,
-    'newcase' => $newcase,
-    'donator' => $donator,
-    'sponsor' => $sponsor,
+    
+    
+   
+    
+    
+    'volunteer'=>$volunteer
         ]);
 
     }
@@ -46,14 +41,7 @@ class IndexController extends Controller
         return view('about');
     }
 
-    public function staff()
-    {
-
-        $staff = User::where('approved', 1)->get();
-        return view('staff', [
-            'staff' =>$staff,
-        ]);
-    }
+    
 
     public function giveform()
     {
@@ -61,6 +49,21 @@ class IndexController extends Controller
     }
 
    
+
+    public function slider()
+    {
+      
+        $activity = Cache::rememberForever('activity', function() {
+            return Activity::orderBy('created_at', 'DESC')->get();
+        });
+
+
+        return view('slider', [
+    
+    'activity' => $activity,
+        ]);
+
+    }
 
    
 }

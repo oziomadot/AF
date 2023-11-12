@@ -40,7 +40,8 @@ class SponsorController extends Controller
         'email' => ['string', 'required', 'email', 'unique:sponsors'],
         'address' => ['string', 'required'],
         'about' => ['string', 'required'],
-        'image1'=> ['image']
+        'image1'=> ['image', 'required_without_all:video'],
+        'video' =>['mimetypes:video/avi,video/mpeg,video/quicktime,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/x-msvideo,video/x-ms-wmv', 'required_without_all:image1'],
 
         ]);
 
@@ -53,6 +54,7 @@ class SponsorController extends Controller
             'address' => request()->address,
             'about' => request()->about,
             'image1' => request()->file('image1')->store('sponsors'),
+            'video' => request()->file('video') ? request()->file('video')->store('activities') : '',
 
         ]);
 
@@ -62,11 +64,40 @@ class SponsorController extends Controller
             'default_graph_version' => 'v17.0',
            ]);
 
+           $video = request()->file('video');
            $image = request()->file('image1');
-           $message = 'With a heart full of joy and gratefullness, we wish to thank in a special way one of our sponsor' . request()->surname .' for having a heart of gold and care for the indigent children. Visit: www.amandinefoundation.org for more information. Please, like, share and follow our page.';
+           $message = '
+           With a heart full of joy and gratefullness, we wish to thank in a special way 
+           one of our sponsor' . request()->surname .' for having a heart of 
+           gold and care for the indigent children. 1 Peter 4:8 "And above all things have fervent charity among yourselves: 
+            for charity shall cover the multitude of sins." Visit: www.amandinefoundation.org 
+           for more information. Please, like, share and follow our page.';
 
 
-
+           if($video){
+    
+            $imageData = [
+              'source' => $fb->videoToUpload($video),
+              'message' => $message,
+             
+             ];
+  
+         
+          try {
+             
+              $response = $fb->post(
+                '/107752142409655/videos',  $imageData,                   
+                'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
+              );
+            } catch(Facebook\Exceptions\FacebookResponseException $e) {
+              echo 'Graph returned an error: ' . $e->getMessage();
+              exit;
+            } catch(Facebook\Exceptions\FacebookSDKException $e) {
+              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+              exit;
+            }
+            $graphNode = $response->getGraphNode();
+} else{
 
           $imageData = [
             'source' => $fb->fileToUpload($image),
@@ -78,8 +109,7 @@ class SponsorController extends Controller
         try {
            
             $response = $fb->post(
-              '/325275893408060/photos',  $imageData,
-           
+              '/107752142409655/photos',  $imageData,           
               'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
             );
           } catch(Facebook\Exceptions\FacebookResponseException $e) {
@@ -91,7 +121,7 @@ class SponsorController extends Controller
           }
           $graphNode = $response->getGraphNode();
 
-
+        }
         return Redirect::route('sponsors.index')->with('status', 'Sponsor added successfully');
     }
 

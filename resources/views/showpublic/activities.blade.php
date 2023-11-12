@@ -11,48 +11,61 @@
 		<div class="col col-md-12">
 			<span id="message"></span>
 			<div class="card" >
-				<div class="card-header text-center text-xl font-bold font-mono text-lime-700">DONATORS </div>
-					@if($donator ->count())
-						@foreach($donator as $donator)
+				<div class="card-header text-center text-xl font-bold font-mono text-lime-700">Activities</div>
+				<div class="card-body">
+					@if($activity ->count())
+						@foreach($activity as $activity)
 
 						<div class="outline outline-offset-4 outline-dotted outline-2 outline-offset-2
 						rounded-2xl	my-8 outline-red-500">
 							<div class=" grid grid-cols-2 gap-2 w-full">
 								<div>
 									<span class="block text-center text-xl text-cyan-700
-									text-mono">Videos</span>
-									@if($donator->video)
+									text-mono"><a href="/allvideos"> Videos</a></span>
+									@if($activity->video)
+									<div>
 									<video width="1280" height="720" controls>
                       
-										<source src="{{asset('storage/'.$donator->video)}}" type="video/ogg">
+										<source src="{{asset('storage/'.$activity->video)}}" type="video/ogg">
 										
 										</video>
 
+										<span class="block  text-lg text-red-700
+									text-serif"><a href="/allvideos"> more videos</a></span>
+									
+								</div>
+								<div>
+										<b>Name:</b> {{$activity->title}}<br>
 										
+									</div>	
 										@else
 										"There is no video"
 										@endif
 								</div>
-								<div class="overflow-hidden h-60">
+						<div class="overflow-hidden h-60">		
 
 									<span class="block text-center text-xl text-red-700
-									text-mono">Pictures</span>
-									@if($donator->image1)
-
-									<img class="object-fill" src="{{asset('storage/'.$donator->image1)}}" />
-										@else
+									text-mono"><a href="/generalactivities">Pictures </a></span>
+									@if($activity->image1)
+<div>
+									<img class="object-fill" src="{{asset('storage/'.$activity->image1)}}" />
+									<span class="block  text-lg text-red-700
+									text-serif"><a href="/generalactivities"> more pictures</a></span>	
+								
+						</div>
+								<div>
+								<b>Name:</b> {{$activity->title}}<br>
+								
+							</div>	
+									@else
 										"There is no images"
 										@endif
-
-								</div>
+</div>
 							</div>
-							<div>
-								<b>Name:</b> @if($donator->othernames): {{$donator->othernames}} @else {{$donator->insitution}} @endif<br>
-								<b>Donated: </b>{{$donator->thing->name ?? ''}}
-							</div>
+							
 							<div class="text-justify outline outline-offset-2 outline-blue-500 outline-2
 							rounded-2xl	my-4">
-								{{$donator->details}}
+								{{$activity->details}}
 								
 
 							</div>
@@ -63,7 +76,7 @@
 
 					@else
                    <div>
-							Please, check later, we are working on uploading donator
+							Please, check later, we are working on uploading beneficiaries
 						</div>
 
 					@endif
@@ -80,7 +93,7 @@
 						</x-general-button>
 					  </a>
 
-                </>
+                </div>
                 </div>
         </div>
     </div>
@@ -90,10 +103,3 @@
      </div>
 
 </x-app-layout>
-
-
-
-
-
-
-

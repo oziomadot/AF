@@ -68,7 +68,13 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function upload(User $user): RedirectResponse
+    public function uploadpix(User $user)
+    {
+        return view('profile.uploadpicture', [
+            'user' => $user,
+        ]);
+    }
+    public function upload(User $user)
     {
         $uuser = request()->validate([
         'profilePix'=> ['image', 'required'],

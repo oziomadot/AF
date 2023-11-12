@@ -51,6 +51,18 @@
                     </template>
                  </div> 
 
+                 <div x-data="imgPreview" x-cloak>
+                  <x-input-label for="video"  :value="__('Video')"/>        
+                  <x-forminput name="video"  type="file" class="block mt-1 w-full" accept="video/*" 
+                  x-ref="myFile" @change="previewFile"/>
+                  <x-input-error :messages="$errors->get('video')" class="mt-2" />    
+                      <template x-if="imgsrc">
+                          <p class="w-40">
+                          <img :src="imgsrc" class="imgPreview">
+                          </p>
+                      </template>
+                   </div> 
+
                 
             
              

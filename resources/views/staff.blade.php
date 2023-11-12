@@ -36,10 +36,10 @@
         @foreach($staff as $staff)
         <div class="sm:w-96 bg-lime-100 sm:ml-5 sm:mt-5 ring-2 ring-offset-2 ring-blue-500 rounded-lg">
           <div class="flex justify-center">
-        <x-image-card class="p-2 sm:p-5 h-56 bg-slate-100 mb-3">
+        <x-image-card class="p-1 sm:p-3  bg-slate-100 mb-3">
           
-          @if($staff->profile_pix)
-          <img src="{{asset('storage/'.$staff->profile_pix)}}" class="rounded-lg w-60 h-52">
+          @if($staff->profilePix)
+          <img src="{{asset('storage/'.$staff->profilePix)}}" class="rounded-lg w-60 h-56">
           @else
           <img src="{{asset('storage/avatar.jpg')}}" class="rounded-full sm:w-52">
           @endif
@@ -48,9 +48,9 @@
         
          <div class="w-auto px-5"> 
         <p class="font-mono text-base text-brown-900"><b>Name:</b>{{$staff->name}}</p>
-        <p class="font-mono text-base text-brown-900"><b>Designation:</b> {{$staff->designation->name}}</p>
+        <p class="font-mono text-base text-brown-900"><b>Designation:</b> {{$staff->designation->name ?? ''}}</p>
         <p class="font-mono text-base text-brown-900"><b>Email:</b> {{$staff->officalemail}}</p>
-                <p class="font-mono  text-cyan-600"><a href="/staff/{{$staff->id}}">...more</a></p>
+                <p class="font-mono  text-cyan-600"><a href="/gstaff/{{$staff->id}}">...more</a></p>
         </div>
         
         

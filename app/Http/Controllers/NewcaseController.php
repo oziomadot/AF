@@ -38,17 +38,17 @@ public function create()
     {
 
         $request->validate([
-            "surname" => ['string', 'required'],
-        "othernames" => ['string', 'required'],
-        "phonenumber" =>['string', 'required'],
-        "email" => ['string', 'required', 'email', 'unique:newcases'],
+            "surname" => ['string', 'nullable'],
+        "othernames" => ['string', 'nullable'],
+        "phonenumber" =>['string', 'nullable'],
+        "email" => ['string', 'email', 'nullable', 'unique:newcases'],
         "address" => ['string', 'required'],
         "details" => ['string', 'required'],
-        'image1' => ['image','required'],
+        'image1' => ['image','required_without_all:video'],
         'image2' => ['image','nullable'],
         'image3' => ['image','nullable'],
         'image4' => ['image','nullable'],
-        'video' => ['video','nullable'],
+        'video' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/x-msvideo,video/x-ms-wmv', 'required_without_all:image1'],
         ]);
 
         Newcase::create([
@@ -74,9 +74,10 @@ public function create()
 
            $image = request()->file('image1');
            $message = 'New case that need help. We are asking for help to take care of this case.   Visit: www.amandinefoundation.org for more information. Please, like, share and follow our page.';
+            $video = request()->file('video');
 
 
-
+            if($image){
 
           $imageData = [
             'source' => $fb->fileToUpload($image),
@@ -88,7 +89,7 @@ public function create()
         try {
            
             $response = $fb->post(
-              '/325275893408060/photos',  $imageData,
+              '/107752142409655/photos',  $imageData,
            
               'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
             );
@@ -100,6 +101,33 @@ public function create()
             exit;
           }
           $graphNode = $response->getGraphNode();
+        }
+
+        if($video){
+            $imageData = [
+                'source' => $fb->videoToUpload($video),
+                'message' => $message,
+               
+               ];
+    
+            
+            try {
+               
+                $response = $fb->post(
+                  '/107752142409655/videos',  $imageData,
+               
+                  'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
+                );
+              } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+              } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+              }
+              $graphNode = $response->getGraphNode();
+    
+        }
 
 
         return redirect()->route('newcases.index')->with('status', 'New request has be added successfully');

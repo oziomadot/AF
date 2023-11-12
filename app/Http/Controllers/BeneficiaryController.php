@@ -36,18 +36,19 @@ class BeneficiaryController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        
 
         $request->validate([
-        "surname" => ['string', 'nullable'],
+        "surname" => ['string', 'required_without_all:institution'],
         "othernames" => ['string', 'nullable'],
-        "institution" => ['string', 'nullable'],
-        "phonenumber" =>['string', 'required'],
+        "institution" => ['string', 'required_without_all:surname'],
+        "phonenumber" =>['string', 'nullable'],
         "email" => ['string', 'nullable', 'email', 'unique:beneficiaries'],
         "address" => ['string', 'required'],
         "details" => ['string', 'required'],
-        'image1' => ['image','required'],
+        'image1' => ['image','required_without_all:video'],
         'image2' => ['image','nullable'],
-        'video' => ['video','nullable'],
+        'video' => ['mimetypes:video/avi,video/mpeg,video/quicktime,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/x-msvideo,video/x-ms-wmv', 'required_without_all:image1'],
         ]);
 
         Beneficiary::create([
@@ -72,8 +73,11 @@ class BeneficiaryController extends Controller
            ]);
 
            $image = request()->file('image1');
-           $message = 'One of the beneficiary from Amandine Foundation.  Visit: www.amandinefoundation.org for more information.
-        Please, like, share and follow our page.';
+           $message = 'Matthew 25:40
+           "And the King will answer them, Truly, I say to you, as you did it to one of the 
+             least of these my brothers, you did it to me.  
+             Visit: www.amandinefoundation.org for more information.
+            Please, like, share and follow our page.';
 
 
 
@@ -84,11 +88,11 @@ class BeneficiaryController extends Controller
            
            ];
 
-        
+     
         try {
            
             $response = $fb->post(
-              '/325275893408060/photos',  $imageData,
+              '/107752142409655/photos',  $imageData,
            
               'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
             );
@@ -99,6 +103,7 @@ class BeneficiaryController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
           }
+         
           $graphNode = $response->getGraphNode();
 
 

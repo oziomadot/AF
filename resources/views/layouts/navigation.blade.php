@@ -32,7 +32,7 @@
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                
                                
-                    <x-nav-link :href="route('staff')" :active="request()->routeIs('staff')">
+                    <x-nav-link :href="route('staff.general')" :active="request()->routeIs('staff')">
                     {{ __('STAFF') }}
                     </x-nav-link>
 
@@ -77,8 +77,8 @@
             @auth
          
             
-           <div class="grid grid-cols-7 gap-4">
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-2 sm:flex">
+           <div class="grid grid-cols-8 gap-4">
+                    <div class="hidden space-x-4 sm:-my-px sm:ml-2 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                          <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
                             {{ __('DASHBOARD')}}
@@ -89,7 +89,7 @@
                 
         
         
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                    <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
                         <x-nav-link :href="route('newcases.index')" :active="request()->routeIs('newcases')">
                             {{ __('NEW CASE') }}
                         </x-nav-link>
@@ -97,14 +97,14 @@
     
     
     
-                <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
                     <x-nav-link :href="route('donators.index')" :active="request()->routeIs('donators')">
                         {{ __('DONATOR') }}
                     </x-nav-link>
                     </div>
     
     
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
                    
                                    
                         <x-nav-link :href="route('beneficiaries.index')" :active="request()->routeIs('beneficiaries')">
@@ -117,19 +117,29 @@
                
     
                 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
                     <x-nav-link :href="route('sponsors.index')" :active="request()->routeIs('sponsors')">
                     {{ __('SPONSOR') }}
                     </x-nav-link>
                 </div>
             
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
                     <x-nav-link :href="route('volunteers.index')" :active="request()->routeIs('volunteers')">
                     {{ __('VOLUNTEERS') }}
                     </x-nav-link>
                 </div>
-        
 
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
+                    <x-nav-link :href="route('activities.index')" :active="request()->routeIs('activity')">
+                    {{ __('ACTIVITIES') }}
+                    </x-nav-link>
+                </div>
+        
+                <div class="hidden space-x-4 sm:-my-px sm:ml-3 sm:flex">
+                    <x-nav-link :href="route('staff.index')" :active="request()->routeIs('staff')">
+                    {{ __('STAFF') }}
+                    </x-nav-link>
+                </div>
            
       
  
@@ -170,7 +180,7 @@
                 {{ __('Profile') }}
             </x-dropdown-link>
            
-            <x-dropdown-link :href="route('uploadpicture', Auth::user()->id)">
+            <x-dropdown-link :href="route('uploadpicture.edit', Auth::user()->id)">
                 {{ __('Picture') }}
             </x-dropdown-link>
             <!-- Authentication -->
@@ -218,19 +228,13 @@
     
    
 
-      <div class="mt-3 space-y-1">
-        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
-                {{ __('DASHBOARD')}}
-            </x-general-button>
-        </x-responsive-nav-link>
-    </div>
+     
     
     
+    <div class="mt-3 space-y-1">
     
-    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
         <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
-            <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
+            <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('index') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
             {{ __('HOME') }}
             </x-general-button>
         </x-responsive-nav-link>
@@ -238,20 +242,20 @@
     
     
     
-    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+    <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('aboutus')" :active="request()->routeIs('aboutus')">
-        <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
+        <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('aboutus') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('ABOUT') }}
         </x-general-button>
     </x-responsive-nav-link>
     </div>
     
     
-    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <div class="mt-3 space-y-1">
     
                    
-        <x-responsive-nav-link :href="route('staff')" :active="request()->routeIs('staff')">
-            <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
+        <x-responsive-nav-link :href="route('staff.general')" :active="request()->routeIs('staff')">
+            <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('staff') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
             {{ __('STAFF') }}
             </x-general-button>
         </x-responsive-nav-link>
@@ -261,7 +265,7 @@
     
     
     
-    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('volunt')" :active="request()->routeIs('volunt')">
         <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('volunt') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('VOLUNTEERS') }}
@@ -270,7 +274,7 @@
     </div>
     
     
-    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    {{-- <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('beneficiaries')" :active="request()->routeIs('beneficiaries')">
         <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('BENEFICIARIES') }}
@@ -278,7 +282,7 @@
     </x-responsive-nav-link>
     </div> --}}
     
-    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    {{-- <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('needshelp')" :active="request()->routeIs('needshelp')">
         <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('ASKING HELP') }}
@@ -287,7 +291,7 @@
     </div> --}}
     
     
-    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    {{-- <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('sponsors')" :active="request()->routeIs('sponsors')">
         <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('SPONSORS') }}
@@ -295,7 +299,7 @@
     </x-responsive-nav-link>
     </div> --}}
     
-    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    {{-- <div class="mt-3 space-y-1">
     <x-responsive-nav-link :href="route('giveform')" :active="request()->routeIs('giveform')">
         <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
         {{ __('DONATE') }}
@@ -314,37 +318,56 @@
         <!-- Responsive Settings Options -->
         @auth
 
+        <div class="mt-3 space-y-1">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <x-general-button  class="bg-blue-700  text-white {{request()->routeIs('dashboard') ? 'bg-blue-300 text-black' : ''}}"  type="button" >
+                    {{ __('DASHBOARD')}}
+                </x-general-button>
+            </x-responsive-nav-link>
+        </div>
         
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('donators.index')" :active="request()->routeIs('donators')">
             {{ __('DONATOR') }}
             </x-responsive-nav-link>
         </div>
     
     
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('beneficiaries.index')" :active="request()->routeIs('beneficiaries')">
             {{ __('BENEFICIARIES') }}
             </x-responsive-nav-link>
         </div>
     
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('newcases.index')" :active="request()->routeIs('cases')">
             {{ __('NEW CASE') }}
             </x-responsive-nav-link>
         </div>
     
     
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('sponsors.index')" :active="request()->routeIs('sponsors')">
             {{ __('SPONSORS') }}
             </x-responsive-nav-link>
         </div>
     
 
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+        <div class="mt-3 space-y-1">
             <x-responsive-nav-link :href="route('volunteers.index')" :active="request()->routeIs('volunteers')">
             {{ __('VOLUNTERS') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="mt-3 space-y-1">
+            <x-responsive-nav-link :href="route('activities.index')" :active="request()->routeIs('activity')">
+            {{ __('ACTIVITIES') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="mt-3 space-y-1">
+            <x-responsive-nav-link :href="route('staff.index')" :active="request()->routeIs('staff')">
+            {{ __('STAFF') }}
             </x-responsive-nav-link>
         </div>
 
