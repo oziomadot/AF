@@ -67,8 +67,13 @@
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        <div class="min-h-screen bg-gray-100 relative">
+            <div class="sticky top-0">     
+                @include('layouts._header')
+                    
+                    
+                     @include('layouts.navigation')
+         </div>
 
             <!-- Page Heading -->
             @if (isset($header))

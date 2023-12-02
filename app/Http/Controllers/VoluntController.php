@@ -78,7 +78,8 @@ class VoluntController extends Controller
            ]);
 
            $image = request()->file('image1');
-           $message = 'We welcom in a special way ' .request()->firstname.' for joining us as a volunteer. May God bless you in whatever you are doing. Visit: www.amandinefoundation.org for more information. Please, like, share and follow our page.';
+           $message = 'We welcom in a special way ' .request()->firstname.' for joining us as a volunteer. May God bless you in whatever you are doing. 2 Timothy 2:15 "Be diligent to present yourself approved to God as a workman who does not need to be ashamed,
+           accurately handling the word of truth." Visit: www.amandinefoundation.org for more information. Please, like, share and follow our page.';
 
 
 
@@ -93,7 +94,7 @@ class VoluntController extends Controller
         try {
            
             $response = $fb->post(
-              '/325275893408060/photos',  $imageData,
+              '/107752142409655/photos',  $imageData,
            
               'EAAEhEwxD4VoBO1j5NMWcVc70B5DL93ZA96vmqehZAPDuDYdvcbU6R6AduGxGG5fMUweVE5sWQKFO5MeA1bCoaHy1NfgV5AGTvLjYdUg685APVMbq9hiXNUJZAlNZCs0ZBVwhgAQZBBZCYrbUMgyJsEtcjrGf1xjAajw1ZCgy0oufxpd23qP9h0Pk0M5agHry59P1XcKOIJIIOs2t7kYZD'
             );
